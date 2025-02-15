@@ -39,7 +39,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      {/* <section id="about">
+      <section id="about">
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
           <h2 className="text-xl font-bold">About</h2>
         </BlurFade>
@@ -48,7 +48,7 @@ export default function Page() {
             {DATA.summary}
           </Markdown>
         </BlurFade>
-      </section> */}
+      </section>
       {/* <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
