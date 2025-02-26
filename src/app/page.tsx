@@ -8,55 +8,25 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import Spline from "@splinetool/react-spline";
+import { Ripple } from "@/components/magicui/ripple";
+import { motion } from "framer-motion";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
   return (
     <main className="flex flex-col w-[100%] justify-center items-center space-y-8">
-      <div className="flex flex-col justify-between items-center h-[100vh] w-[90%]">
-        <div className="h-[30%] w-[100%] p-10">
-          <section id="hero">
-            <div className="mx-auto w-full max-w-2xl space-y-8">
-              <div className="gap-2 flex justify-between">
-                <div className="flex-col flex flex-1 space-y-1.5">
-                  <BlurFadeText
-                    delay={BLUR_FADE_DELAY}
-                    className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-                    yOffset={8}
-                    text={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
-                  />
-                  <BlurFadeText
-                    className="max-w-[600px] md:text-xl"
-                    delay={BLUR_FADE_DELAY}
-                    text={DATA.description}
-                  />
-                </div>
-                <BlurFade delay={BLUR_FADE_DELAY}>
-                  <Avatar className="size-28 border">
-                    <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                    <AvatarFallback>{DATA.initials}</AvatarFallback>
-                  </Avatar>
-                </BlurFade>
-              </div>
-            </div>
-          </section>
+      <div className="relative flex h-[100vh] w-full flex-col items-center justify-center overflow-hidden rounded-2xl border shadow-lg space-y-6 p-6">
+        <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent space-y-2">
+          <p className="text-white">Hello, I'm</p>
+          <p>{DATA.name}</p>
+          <p className="text-neutral-300">Full Stack Deverloper</p>
         </div>
-        <div className="h-[70%] w-[100%]">
-          <Spline scene="https://prod.spline.design/q0U1X2Uimv5GFoOx/scene.splinecode" />
-        </div>
+
+        {/* Ripple Effect */}
+        <Ripple />
       </div>
-      <section id="about" className="space-y-4">
-        <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-3xl font-bold flex justify-center items-center">About</h2>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 4} className=" w-[50vw]">
-          <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            {DATA.summary}
-          </Markdown>
-        </BlurFade>
-      </section>
+
       {/* <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
@@ -82,7 +52,7 @@ export default function Page() {
           ))}
         </div>
       </section> */}
-      <section id="education">
+      {/* <section id="education">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
             <h2 className="text-xl font-bold">Education</h2>
@@ -104,21 +74,32 @@ export default function Page() {
             </BlurFade>
           ))}
         </div>
-      </section>
-      <section id="skills">
-        <div className="flex min-h-0 flex-col gap-y-3">
+      </section> */}
+      <section id="skills" className="py-10">
+        <div className="flex flex-col items-center space-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-xl font-bold">Skills</h2>
+            <h2 className="text-4xl font-bold text-center text-white">
+              My Toolbox
+            </h2>
+            <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-2 rounded-full"></span>
           </BlurFade>
-          <div className="flex flex-wrap gap-1">
+
+          {/* Skills Grid */}
+          <div className="flex flex-wrap justify-center gap-4 px-6">
             {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <Badge key={skill}>{skill}</Badge>
+              <BlurFade
+                className="relative overflow-hidden bg-gradient-to-r from-purple-500 via-blue-600 to-cyan-400 rounded-lg p-[1px] transition-transform transform hover:scale-105"
+                key={skill}
+              >
+                <div className="bg-black text-white text-lg px-4 py-2 rounded-md">
+                  {skill}
+                </div>
               </BlurFade>
             ))}
           </div>
         </div>
       </section>
+
       <section id="projects">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>

@@ -10,7 +10,7 @@ export const DATA = {
   description:
     "Freelance Full Stack Web Developer | open source contributor | Devops",
   summary:
-    "Crafting Scalable Solutions with Code and Innovation I am Tanmay Kumar Chaurasia, a passionate and skilled Web Developer What I Bring to the Table: 👉Proficient in JavaScript and TypeScript for robust and scalable development. 👉Expertise in MERN Stack and Next.js for building responsive and efficient web applications. 👉Experience with Firebase, PostgreSQL, and Docker for seamless integration, database management, and containerization.I thrive in fast-paced environments and love taking on challenges that push me out of my comfort zone. Let's connect and explore opportunities where I can contribute to your organization's growth and innovation!",
+    `Crafting Scalable Solutions with Code and Innovation I am Tanmay Kumar Chaurasia, a passionate and skilled Web Developer What I Bring to the Table:\n 👉Proficient in JavaScript and TypeScript for robust and scalable development. 👉Expertise in MERN Stack and Next.js for building responsive and efficient web applications.\n 👉Experience with Firebase, PostgreSQL, and Docker for seamless integration, database management, and containerization.I thrive in fast-paced environments and love taking on challenges that push me out of my comfort zone. Let's connect and explore opportunities where I can contribute to your organization's growth and innovation!`,
   avatarUrl: "./ProfilePhoto.png",
   skills: [
     "c++",
