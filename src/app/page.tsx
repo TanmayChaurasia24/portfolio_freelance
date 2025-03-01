@@ -32,6 +32,8 @@ import {
   SiApachekafka,
   SiNginx,
 } from "react-icons/si";
+import Image from "next/image";
+import { Span } from "next/dist/trace";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -184,6 +186,7 @@ export default function Page() {
           </div>
         </div>
       </section>
+
       <section id="projects" className="py-16 text-white">
         <div className="text-center mb-12">
           <motion.h2
@@ -194,74 +197,52 @@ export default function Page() {
           >
             My Projects
           </motion.h2>
-          <p className="text-muted-foreground md:text-xl mt-2">
-            I've worked on a variety of projects, from simple websites to
-            complex web applications.
-          </p>
+          <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-2 rounded-full"></span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 h-[60vh] w-[100vw]">
-          {DATA.projects.map((project, idx) => (
+        <div className="space-y-16 px-6">
+          {DATA.projects.map((project, index) => (
             <motion.div
-              key={project.title}
-              className="relative group rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              key={index}
+              className={`flex flex-col md:flex-row items-center gap-8 ${
+                index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+              }`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              {/* Animated Gradient Border */}
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-[1px] animate-border h-[100%] w-[100%]">
-                <div className="h-full w-full bg-gray-800 rounded-lg">
-                  
-                  <div>
-                    {/* Project Image */}
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full object-cover rounded-md"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center items-center pl-10 pr-10">
-                    {/* Project Details */}
-                    <h3 className="text-xl font-semibold text-blue-400 mt-4">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm mt-2">
-                      {project.description}
-                    </p>
-                    {/* Tags */}
-                    <div className="flex flex-wrap justify-center items-center gap-2 mt-3">
-                      {project.technologies.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="bg-blue-500 text-white text-xs px-2 py-1 rounded-md"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    {/* Links */}
-                    <div className="mt-4 flex justify-between items-center">
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-blue-400 hover:underline"
-                      >
-                        View Project →
-                      </a>
-                      {project.video && (
-                        <a
-                          href={project.video}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-gray-400 hover:text-gray-200"
-                        >
-                          Watch Video
-                        </a>
-                      )}
-                    </div>
-                  </div>
+              {/* Project Image */}
+              <div className="w-full md:w-1/2 h-80 overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={700}
+                  height={400}
+                  className="object-cover w-full h-full rounded-lg shadow-lg"
+                />
+              </div>
+
+              {/* Project Content */}
+              <div className="w-full md:w-1/2 text-center md:text-left">
+                <h3 className="text-3xl font-bold">{project.title}</h3>
+                <p className="text-gray-300 mt-4">{project.description}</p>
+                <div className="mt-4 flex justify-center md:justify-start gap-4">
+                  {project.links[0].type && (
+                    <Link
+                      href={project.links[0].href}
+                      className="text-blue-400 hover:underline"
+                    >
+                      Live Demo
+                    </Link>
+                  )}
+                  {project.links[0].type && (
+                    <Link
+                      href={project.links[0].href}
+                      className="text-blue-400 hover:underline"
+                    >
+                      GitHub
+                    </Link>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -306,37 +287,60 @@ export default function Page() {
                     image={project.image}
                     links={project.links}
                   />
-                </BlurFade>
+                </BlurFade
               ))}
             </ul>
           </BlurFade>
         </div>
       </section> */}
-        <section id="contact">
-          <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
+      <section id="contact" className="w-full py-16 ">
+        <div className="container mx-auto px-6 md:px-12 lg:px-16">
+          <div className="grid md:grid-cols-2 items-center gap-10">
+            {/* Left - Contact Text */}
             <BlurFade delay={BLUR_FADE_DELAY * 16}>
-              <div className="space-y-3">
-                <div className="text-4xl ">
-                  Contact
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              <div className="space-y-4 text-center md:text-left">
+                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
                   Get in Touch
                 </h2>
-                <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Want to chat? Just shoot me a dm{" "}
+                <p className="max-w-[500px] text-muted-foreground text-lg">
+                  Want to chat? Just shoot me a DM{" "}
                   <Link
                     href={DATA.contact.social.X.url}
                     className="text-blue-500 hover:underline"
                   >
-                    with a direct question on twitter
+                    with a direct question on Twitter
                   </Link>{" "}
                   and I&apos;ll respond whenever I can. I will ignore all
                   soliciting.
                 </p>
+                <p className="max-w-[500px] text-muted-foreground text-sm flex flex-col justify-start">
+                  <div>
+                    <span className="font-semibold text-white">Email:</span>{" "}
+                    kuamrchaurasiatanmay@gmail.com
+                  </div>
+                  <div>
+                    <span className="font-semibold text-white">
+                      Phone Number:
+                    </span>{" "}
+                    +91 7985764433
+                  </div>
+                </p>
+              </div>
+            </BlurFade>
+
+            {/* Right - Profile Image */}
+            <BlurFade delay={BLUR_FADE_DELAY * 18}>
+              <div className="flex justify-center">
+                <img
+                  src={DATA.avatarUrl} // Replace with your actual image path
+                  alt="Your Name"
+                  className="w-48 h-48 md:w-56 md:h-56 object-cover rounded-full border-4 border-blue-500 shadow-lg"
+                />
               </div>
             </BlurFade>
           </div>
-        </section>
+        </div>
+      </section>
     </main>
   );
 }

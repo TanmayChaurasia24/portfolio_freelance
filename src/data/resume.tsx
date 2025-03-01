@@ -118,7 +118,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/fundme.png",
+      image: "https://ideogram.ai/assets/progressive-image/balanced/response/yjP5Ssg0QxOGZ1mJbbb5vg",
       video:
         "",
     },
@@ -139,7 +139,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "https://ideogram.ai/assets/progressive-image/balanced/response/5AZ0ihohTo65VqKqizLGbw",
       video: "",
     },
     {
@@ -166,7 +166,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "https://ideogram.ai/assets/progressive-image/balanced/response/oDfu5J7eStSzcsGENc9ODQ",
       video: "",
     },
     {
@@ -190,7 +190,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "https://ideogram.ai/assets/progressive-image/balanced/response/uaND-LaIR663xTsz1QlprA",
       video: "",
     },
 
