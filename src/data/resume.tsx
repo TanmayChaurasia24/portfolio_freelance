@@ -10,7 +10,7 @@ export const DATA = {
   description:
     "Freelance Full Stack Web Developer | open source contributor | Devops",
   summary:
-    `Crafting Scalable Solutions with Code and Innovation I am Tanmay Kumar Chaurasia, a passionate and skilled Web Developer What I Bring to the Table:\n 👉Proficient in JavaScript and TypeScript for robust and scalable development. 👉Expertise in MERN Stack and Next.js for building responsive and efficient web applications.\n 👉Experience with Firebase, PostgreSQL, and Docker for seamless integration, database management, and containerization.I thrive in fast-paced environments and love taking on challenges that push me out of my comfort zone. Let's connect and explore opportunities where I can contribute to your organization's growth and innovation!`,
+    `Crafting Scalable Solutions with Code and Innovation I am Tanmay Kumar Chaurasia, a passionate and skilled Web Developer What I Bring to the Table:\n 👉Proficient in JavaScript and TypeScript for robust and scalable development. 👉Expertise in MERN Stack and Next.js for building responsive and efficient web applications. 👉Experience with Firebase, PostgreSQL, and Docker for seamless integration, database management, and containerization.I thrive in fast-paced environments and love taking on challenges that push me out of my comfort zone. Let's connect and explore opportunities where I can contribute to your organization's growth and innovation!`,
   avatarUrl: "./ProfilePhoto.png",
   skills: [
     "c++",
@@ -33,8 +33,6 @@ export const DATA = {
     "Linux",
     "Computer Networks",
     "Operating system",
-
-
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -125,28 +123,74 @@ export const DATA = {
         "",
     },
     {
-      title: "Bright Minds",
+      title: "Tamani Scapes",
       href: "",
       dates: "June 2024 - Present",
       active: true,
       description:
-        "Platform for students where they can read articles for different subjects and can learn things",
+        "Mobile Application for Downloading Cool Wallpapers",
       technologies: [
-        "React.js",
-        "Typescript",
-        "Express.js",
-        "MongoDB",
-        "WebSockets",
-        "TailwindCSS",
+        "React Native"
       ],
       links: [
         {
           type: "Github",
-          href: "https://github.com/TanmayChaurasia24/edutech",
+          href: "https://github.com/TanmayChaurasia24/tamani-scapes",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/brightminds.png",
+      image: "",
+      video: "",
+    },
+    {
+      title: "HashMap.ai",
+      href: "",
+      dates: "June 2024 - Present",
+      active: true,
+      description:
+        "Developing AI powered platform for job Hunting, optimizing resume, automates application and many more",
+      technologies: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "Golang",
+        "Firebase",
+        "MongoDB",
+        "Kafka",
+        "Docker",
+      ],
+      links: [
+        {
+          type: "Github",
+          href: "https://github.com/TanmayChaurasia24/Hashmap.ai",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
+      title: "Place-tale-teller",
+      href: "",
+      dates: "June 2024 - Present",
+      active: true,
+      description:
+        "AI Agent that tell you the history and geographic conditions of any place, Very usefull for travelllers",
+      technologies: [
+        "Next.js",
+        "Typescript",
+        "Docker",
+        "Nginx",
+        "Gen-Ai"
+      ],
+      links: [
+        {
+          type: "Github",
+          href: "https://github.com/TanmayChaurasia24/place-tale-weaver",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
       video: "",
     },
 
