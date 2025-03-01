@@ -294,7 +294,6 @@ export default function Page() {
       <section id="contact" className="w-full py-16 ">
         <div className="container mx-auto px-6 md:px-12 lg:px-16">
           <div className="grid md:grid-cols-2 items-center gap-10">
-            
             {/* Left - Contact Text */}
             <BlurFade delay={BLUR_FADE_DELAY * 16}>
               <div className="space-y-4 text-center md:text-left">
