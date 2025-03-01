@@ -1,11 +1,10 @@
 "use client";
-import { HackathonCard } from "@/components/hackathon-card";
+
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { ProjectCard } from "@/components/project-card";
+
 import { DATA } from "@/data/resume";
 import Link from "next/link";
-import Markdown from "react-markdown";
+
 import { Ripple } from "@/components/magicui/ripple";
 import { motion } from "framer-motion";
 import {
@@ -23,7 +22,6 @@ import {
   SiExpress,
   SiHono,
   SiGoland,
-  SiSupabase,
   SiFirebase,
   SiMongodb,
   SiKubernetes,
@@ -313,7 +311,7 @@ export default function Page() {
                   and I&apos;ll respond whenever I can. I will ignore all
                   soliciting.
                 </p>
-                <p className="max-w-[500px] text-muted-foreground text-sm flex flex-col justify-start">
+                <div className="max-w-[500px] text-muted-foreground text-sm flex flex-col justify-start">
                   <div>
                     <span className="font-semibold text-white">Email:</span>{" "}
                     kuamrchaurasiatanmay@gmail.com
@@ -324,7 +322,7 @@ export default function Page() {
                     </span>{" "}
                     +91 7985764433
                   </div>
-                </p>
+                </div>
               </div>
             </BlurFade>
 
