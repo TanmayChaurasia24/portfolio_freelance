@@ -82,7 +82,7 @@ export default function Page() {
     <main className="flex flex-col w-[100%] justify-center items-center space-y-8">
       <div className="relative flex h-[100vh] w-full flex-col items-center justify-center overflow-hidden rounded-2xl border shadow-lg space-y-6 p-6">
         <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent space-y-2">
-          <p className="text-white">Hello, I'm</p>
+          <p className="text-white">Hello, I&apos;m</p>
           <p>{DATA.name}</p>
           <p className="text-neutral-300">Full Stack Deverloper</p>
         </div>
