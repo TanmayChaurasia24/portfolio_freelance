@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["ideogram.ai"], // Add the required domain here
+    domains: ["ideogram.ai", "drive.google.com"], // Add the required domain here
   },
 };
 

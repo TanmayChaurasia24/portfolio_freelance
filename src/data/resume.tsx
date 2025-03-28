@@ -1,6 +1,7 @@
 import { Icons } from "@/components/icons";
 import { HomeIcon, NotebookIcon } from "lucide-react";
 
+
 export const DATA = {
   name: "Tanmay Kumar Chaurasia",
   initials: "TKC",
@@ -98,29 +99,66 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Fundme",
+      title: "Deepak Agencies",
       href: "",
-      dates: "June 2024 - Present",
+      // dates: "June 2024 - Present",
       active: true,
       description:
-        "CrowdFunding website which help Developers to fund their projects by there fans.",
+        "Website for a local electronics store to showcase their products.",
       technologies: [
         "Next.js",
         "Typescript",
         "MongoDB",
-        "Razorpay",
         "TailwindCSS"
       ],
       links: [
         {
-          type: "Github",
-          href: "https://github.com/TanmayChaurasia24/FundMe",
-          icon: <Icons.github className="size-3" />,
+          type: "Live Demo",
+          href: "https://deepakagencieskanpur.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        }
+      ],
+      images: [
+        "/da1.png",
+        "/da2.png",
+        "/da3.png",
+        "/da4.png",
+        "/da5.png",
+        "/da6.png",
+        "/da7.png"
+      ],
+      video: "",
+    },
+    {
+      title: "Achiverr",
+      href: "",
+      // dates: "June 2024 - Present",
+      active: true,
+      description:
+        "A Ai-agent that helps you to achive your goals.",
+      technologies: [
+        "React.js",
+        "Typescript",
+        "Prisma",
+        "TailwindCSS",
+        "PostgreSQL",
+        "Node.js",
+        "Vercel",
+      ],
+      links: [
+        {
+          type: "Live Demo",
+          href: "https://achiverr.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "https://ideogram.ai/assets/progressive-image/balanced/response/yjP5Ssg0QxOGZ1mJbbb5vg",
-      video:
-        "",
+      images: [
+        "/ach1.png",
+        "/ach2.png",
+        "/ach3.png",
+        "/ach4.png",
+      ],
+      video: "",
     },
     {
       title: "Tamani Scapes",
@@ -139,7 +177,11 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "https://ideogram.ai/assets/progressive-image/balanced/response/5AZ0ihohTo65VqKqizLGbw",
+      images: [
+        "https://ideogram.ai/assets/progressive-image/balanced/response/5AZ0ihohTo65VqKqizLGbw",
+        "https://ideogram.ai/assets/progressive-image/balanced/response/yjP5Ssg0QxOGZ1mJbbb5vg",
+        "https://ideogram.ai/assets/progressive-image/balanced/response/uaND-LaIR663xTsz1QlprA"
+      ],
       video: "",
     },
     {
@@ -166,7 +208,11 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "https://ideogram.ai/assets/progressive-image/balanced/response/oDfu5J7eStSzcsGENc9ODQ",
+      images: [
+        "https://ideogram.ai/assets/progressive-image/balanced/response/oDfu5J7eStSzcsGENc9ODQ",
+        "https://ideogram.ai/assets/progressive-image/balanced/response/yjP5Ssg0QxOGZ1mJbbb5vg",
+        "https://ideogram.ai/assets/progressive-image/balanced/response/uaND-LaIR663xTsz1QlprA"
+      ],
       video: "",
     },
     {
@@ -189,8 +235,16 @@ export const DATA = {
           href: "https://github.com/TanmayChaurasia24/place-tale-weaver",
           icon: <Icons.github className="size-3" />,
         },
+        {
+          type: "Live Demo",
+          href: "https://place-tale-teller.onrender.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
       ],
-      image: "https://ideogram.ai/assets/progressive-image/balanced/response/uaND-LaIR663xTsz1QlprA",
+      images: [
+        "/place1.png",
+        "/place2.png",
+      ],
       video: "",
     },
 

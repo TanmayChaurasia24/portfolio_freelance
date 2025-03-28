@@ -1,6 +1,7 @@
 "use client";
 
 import BlurFade from "@/components/magicui/blur-fade";
+import Carousel from "@/components/carousel";
 
 import { DATA } from "@/data/resume";
 import Link from "next/link";
@@ -211,12 +212,9 @@ export default function Page() {
             >
               {/* Project Image */}
               <div className="w-full md:w-1/2 h-80 overflow-hidden">
-                <Image
-                  src={project.image}
+                <Carousel
+                  images={project.images}
                   alt={project.title}
-                  width={700}
-                  height={400}
-                  className="object-cover w-full h-full rounded-lg shadow-lg"
                 />
               </div>
 
@@ -224,23 +222,29 @@ export default function Page() {
               <div className="w-full md:w-1/2 text-center md:text-left">
                 <h3 className="text-3xl font-bold">{project.title}</h3>
                 <p className="text-gray-300 mt-4">{project.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.technologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
                 <div className="mt-4 flex justify-center md:justify-start gap-4">
-                  {project.links[0].type && (
+                  {project.links.map((link, idx) => (
                     <Link
-                      href={project.links[0].href}
-                      className="text-blue-400 hover:underline"
+                      key={idx}
+                      href={link.href}
+                      className="text-blue-400 hover:underline flex items-center gap-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      Live Demo
+                      <span className="w-4 h-4">{link.icon}</span>
+                      {link.type}
                     </Link>
-                  )}
-                  {project.links[0].type && (
-                    <Link
-                      href={project.links[0].href}
-                      className="text-blue-400 hover:underline"
-                    >
-                      GitHub
-                    </Link>
-                  )}
+                  ))}
                 </div>
               </div>
             </motion.div>
