@@ -1,11 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import BlurFade from "@/components/magicui/blur-fade";
-import Carousel from "@/components/carousel";
-
 import { DATA } from "@/data/resume";
+import { portfolioProjects, PortfolioProject } from "@/data/portfolio";
 import Link from "next/link";
-
 import { Ripple } from "@/components/magicui/ripple";
 import { motion } from "framer-motion";
 import {
@@ -31,8 +30,10 @@ import {
   SiApachekafka,
   SiNginx,
 } from "react-icons/si";
-import Image from "next/image";
-import { Span } from "next/dist/trace";
+import ServiceCard from "@/components/service-card";
+import PortfolioGrid from "@/components/portfolio-grid";
+import PortfolioModal from "@/components/portfolio-modal";
+import ProcessTimeline from "@/components/process-timeline";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -79,91 +80,186 @@ const categories = [
 ];
 
 export default function Page() {
+  const [selectedProject, setSelectedProject] =
+    useState<PortfolioProject | null>(null);
+
   return (
-    <main className="flex flex-col w-[100%] justify-center items-center space-y-8">
-      <div className="relative flex h-[100vh] w-full flex-col items-center justify-center overflow-hidden rounded-2xl border shadow-lg space-y-6 p-6">
-        <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent space-y-2">
-          <p className="text-white">Hello, I&apos;m</p>
-          <p>{DATA.name}</p>
-          <p className="text-neutral-300">Full Stack Deverloper</p>
-        </div>
+    <main className="flex flex-col w-full justify-center items-center">
+      {/* ═══════════════════════════════════════════════════════
+          HERO SECTION
+      ═══════════════════════════════════════════════════════ */}
+      <section
+        id="hero"
+        className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-white/5 shadow-lg space-y-8 p-6"
+      >
+        <div className="z-10 whitespace-pre-wrap text-center space-y-4 max-w-3xl">
+          <BlurFade delay={BLUR_FADE_DELAY}>
+            <p className="text-gray-400 text-lg font-medium tracking-wide uppercase">
+              Freelance Developer
+            </p>
+          </BlurFade>
 
-        {/* Ripple Effect */}
-        <Ripple />
-      </div>
+          <BlurFade delay={BLUR_FADE_DELAY * 3}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+              <span className="text-white">I Build Apps That</span>
+              <br />
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                Grow Businesses
+              </span>
+            </h1>
+          </BlurFade>
 
-      {/* <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold">Work Experience</h2>
+            <p className="text-gray-400 text-lg max-w-xl mx-auto">
+              Full-Stack Web &amp; Mobile App Development — from idea to
+              production-ready product.
+            </p>
           </BlurFade>
-          {DATA.work.map((work, id) => (
-            <BlurFade
-              key={work.company}
-              delay={BLUR_FADE_DELAY * 6 + id * 0.05}
-            >
-              <ResumeCard
-                key={work.company}
-                logoUrl={work.logoUrl}
-                altText={work.company}
-                title={work.company}
-                subtitle={work.title}
-                href={work.href}
-                badges={work.badges}
-                period={`${work.start} - ${work.end ?? "Present"}`}
-                description={work.description}
-              />
-            </BlurFade>
-          ))}
-        </div>
-      </section> */}
-      {/* <section id="education">
-        <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-xl font-bold">Education</h2>
-          </BlurFade>
-          {DATA.education.map((education, id) => (
-            <BlurFade
-              key={education.school}
-              delay={BLUR_FADE_DELAY * 8 + id * 0.05}
-            >
-              <ResumeCard
-                key={education.school}
-                href={education.href}
-                logoUrl={education.logoUrl}
-                altText={education.school}
-                title={education.school}
-                subtitle={education.degree}
-                period={`${education.start} - ${education.end}`}
-              />
-            </BlurFade>
-          ))}
-        </div>
-      </section> */}
-      <section id="skills" className="py-16 text-white">
-        <div className="flex flex-col items-center space-y-6">
-          {/* Title with Animation */}
-          <motion.h2
-            className="text-4xl font-bold text-center"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            My Toolbox
-          </motion.h2>
-          <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-2 rounded-full"></span>
 
-          {/* Categories Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full px-6">
+          <BlurFade delay={BLUR_FADE_DELAY * 7}>
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
+              <a
+                href="#portfolio"
+                className="px-8 py-3.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold text-sm hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-0.5"
+              >
+                View My Work
+              </a>
+              <a
+                href="#contact"
+                className="px-8 py-3.5 bg-white/5 text-gray-300 rounded-full font-semibold text-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-0.5"
+              >
+                Let&apos;s Talk
+              </a>
+            </div>
+          </BlurFade>
+        </div>
+
+        <Ripple />
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          SERVICES SECTION
+      ═══════════════════════════════════════════════════════ */}
+      <section id="services" className="w-full py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <motion.h2
+              className="text-4xl font-bold text-white"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              What I Offer
+            </motion.h2>
+            <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-4 rounded-full" />
+            <motion.p
+              className="text-gray-400 mt-4 max-w-lg mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              End-to-end development services to bring your digital product to
+              life.
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {DATA.services.map((service, index) => (
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                icon={service.icon}
+                description={service.description}
+                features={service.features}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          PORTFOLIO SECTION
+      ═══════════════════════════════════════════════════════ */}
+      <section id="portfolio" className="w-full py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <motion.h2
+              className="text-4xl font-bold text-white"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              My Portfolio
+            </motion.h2>
+            <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-4 rounded-full" />
+            <motion.p
+              className="text-gray-400 mt-4 max-w-lg mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              A showcase of web and mobile applications I&apos;ve built for
+              clients and personal projects.
+            </motion.p>
+          </div>
+
+          <PortfolioGrid
+            projects={portfolioProjects}
+            onProjectClick={setSelectedProject}
+          />
+        </div>
+      </section>
+
+      {/* Portfolio Modal */}
+      <PortfolioModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+
+      {/* ═══════════════════════════════════════════════════════
+          TECH STACK SECTION
+      ═══════════════════════════════════════════════════════ */}
+      <section id="skills" className="w-full py-24 px-6 text-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <motion.h2
+              className="text-4xl font-bold"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              My Toolbox
+            </motion.h2>
+            <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-4 rounded-full" />
+            <motion.p
+              className="text-gray-400 mt-4 max-w-lg mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              I use modern, battle-tested technologies to build reliable
+              products.
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, idx) => (
               <motion.div
                 key={idx}
-                className="bg-gradient-to-r from-purple-500 via-blue-600 to-cyan-400 p-[1px] rounded-lg shadow-lg"
+                className="bg-gradient-to-r from-purple-500 via-blue-600 to-cyan-400 p-[1px] rounded-xl"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                <div className="bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-700 backdrop-blur-lg h-full w-full">
+                <div className="bg-gray-900 p-6 rounded-xl h-full w-full">
                   <h3 className="text-xl font-semibold mb-4 text-blue-400">
                     {category.title}
                   </h3>
@@ -171,11 +267,11 @@ export default function Page() {
                     {category.skills.map((skill, i) => (
                       <motion.div
                         key={i}
-                        className="flex items-center bg-black bg-opacity-50 px-3 py-2 rounded-lg shadow-md hover:scale-105 transition-transform"
+                        className="flex items-center bg-black/50 px-3 py-2 rounded-lg hover:scale-105 transition-transform"
                         whileHover={{ scale: 1.1 }}
                       >
-                        <span className="text-2xl mr-2">{skill.icon}</span>
-                        <span className="text-lg">{skill.name}</span>
+                        <span className="text-xl mr-2">{skill.icon}</span>
+                        <span className="text-sm">{skill.name}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -186,146 +282,115 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="projects" className="py-16 text-white">
-        <div className="text-center mb-12">
-          <motion.h2
-            className="text-4xl font-bold"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            My Projects
-          </motion.h2>
-          <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-2 rounded-full"></span>
-        </div>
-
-        <div className="space-y-16 px-6">
-          {DATA.projects.map((project, index) => (
-            <motion.div
-              key={index}
-              className={`flex flex-col md:flex-row items-center gap-8 ${
-                index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-              }`}
-              initial={{ opacity: 0, y: 20 }}
+      {/* ═══════════════════════════════════════════════════════
+          PROCESS / HOW I WORK SECTION
+      ═══════════════════════════════════════════════════════ */}
+      <section id="process" className="w-full py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <motion.h2
+              className="text-4xl font-bold text-white"
+              initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              {/* Project Image */}
-              <div className="w-full md:w-1/2 h-80 overflow-hidden">
-                <Carousel
-                  images={project.images}
-                  alt={project.title}
-                />
-              </div>
+              How I Work
+            </motion.h2>
+            <span className="block h-[3px] w-16 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-4 rounded-full" />
+            <motion.p
+              className="text-gray-400 mt-4 max-w-lg mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              A transparent, collaborative process from initial idea to final
+              launch.
+            </motion.p>
+          </div>
 
-              {/* Project Content */}
-              <div className="w-full md:w-1/2 text-center md:text-left">
-                <h3 className="text-3xl font-bold">{project.title}</h3>
-                <p className="text-gray-300 mt-4">{project.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {project.technologies.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="mt-4 flex justify-center md:justify-start gap-4">
-                  {project.links.map((link, idx) => (
-                    <Link
-                      key={idx}
-                      href={link.href}
-                      className="text-blue-400 hover:underline flex items-center gap-2"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="w-4 h-4">{link.icon}</span>
-                      {link.type}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <ProcessTimeline steps={DATA.process} />
         </div>
       </section>
 
-      {/* <section id="hackathons">
-        <div className="space-y-12 w-full py-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 13}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Hackathons
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  I like building things
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  During my time in university, I attended{" "}
-                  {DATA.hackathons.length}+ hackathons. People from around the
-                  country would come together and build incredible things in 2-3
-                  days. It was eye-opening to see the endless possibilities
-                  brought to life by a group of motivated and passionate
-                  individuals.
-                </p>
-              </div>
-            </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-              {DATA.hackathons.map((project, id) => (
-                <BlurFade
-                  key={project.title + project.dates}
-                  delay={BLUR_FADE_DELAY * 15 + id * 0.05}
-                >
-                  <HackathonCard
-                    title={project.title}
-                    description={project.description}
-                    location={project.location}
-                    dates={project.dates}
-                    image={project.image}
-                    links={project.links}
-                  />
-                </BlurFade
-              ))}
-            </ul>
-          </BlurFade>
-        </div>
-      </section> */}
-      <section id="contact" className="w-full py-16 ">
-        <div className="container mx-auto px-6 md:px-12 lg:px-16">
-          <div className="grid md:grid-cols-2 items-center gap-10">
+      {/* ═══════════════════════════════════════════════════════
+          CTA SECTION
+      ═══════════════════════════════════════════════════════ */}
+      <section className="w-full py-20 px-6">
+        <motion.div
+          className="max-w-4xl mx-auto relative overflow-hidden rounded-3xl"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20" />
+          <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm" />
+
+          {/* Decorative blurs */}
+          <div className="absolute -top-20 -left-20 w-60 h-60 bg-blue-500/20 rounded-full blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-purple-500/20 rounded-full blur-3xl" />
+
+          <div className="relative text-center py-16 px-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Ready to Bring Your Idea to Life?
+            </h2>
+            <p className="text-gray-400 max-w-md mx-auto mb-8">
+              Let&apos;s discuss your project and build something amazing
+              together. No commitment, just a conversation.
+            </p>
+            <a
+              href="#contact"
+              className="inline-block px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold text-base hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-0.5 cta-glow"
+            >
+              Get In Touch →
+            </a>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          CONTACT SECTION
+      ═══════════════════════════════════════════════════════ */}
+      <section id="contact" className="w-full py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 items-center gap-12">
             {/* Left - Contact Text */}
             <BlurFade delay={BLUR_FADE_DELAY * 16}>
-              <div className="space-y-4 text-center md:text-left">
-                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                  Get in Touch
+              <div className="space-y-6 text-center md:text-left">
+                <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                  Let&apos;s Discuss Your Project
                 </h2>
-                <p className="max-w-[500px] text-muted-foreground text-lg">
-                  Want to chat? Just shoot me a DM{" "}
-                  <Link
-                    href={DATA.contact.social.X.url}
-                    className="text-blue-500 hover:underline"
-                  >
-                    with a direct question on Twitter
-                  </Link>{" "}
-                  and I&apos;ll respond whenever I can. I will ignore all
-                  soliciting.
+                <p className="max-w-[500px] text-gray-400 text-lg leading-relaxed">
+                  Have an idea for a web or mobile app? I&apos;d love to hear
+                  about it. Reach out through any of these channels and
+                  I&apos;ll get back to you within 24 hours.
                 </p>
-                <div className="max-w-[500px] text-muted-foreground text-sm flex flex-col justify-start">
-                  <div>
-                    <span className="font-semibold text-white">Email:</span>{" "}
-                    kuamrchaurasiatanmay@gmail.com
+                <div className="space-y-3 text-gray-400">
+                  <div className="flex items-center gap-3 md:justify-start justify-center">
+                    <span className="text-blue-400">✉</span>
+                    <span>{DATA.contact.email}</span>
                   </div>
-                  <div>
-                    <span className="font-semibold text-white">
-                      Phone Number:
-                    </span>{" "}
-                    +91 7985764433
+                  <div className="flex items-center gap-3 md:justify-start justify-center">
+                    <span className="text-blue-400">📞</span>
+                    <span>{DATA.contact.tel}</span>
                   </div>
+                </div>
+                <div className="flex gap-3 md:justify-start justify-center pt-2">
+                  {Object.entries(DATA.contact.social).map(([name, social]) => (
+                    <Link
+                      key={name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 flex items-center justify-center transition-all"
+                      aria-label={name}
+                    >
+                      <social.icon className="w-4 h-4 text-gray-300" />
+                    </Link>
+                  ))}
                 </div>
               </div>
             </BlurFade>
@@ -333,16 +398,23 @@ export default function Page() {
             {/* Right - Profile Image */}
             <BlurFade delay={BLUR_FADE_DELAY * 18}>
               <div className="flex justify-center">
-                <img
-                  src={DATA.avatarUrl} // Replace with your actual image path
-                  alt="Your Name"
-                  className="w-48 h-48 md:w-56 md:h-56 object-cover rounded-full border-4 border-blue-500 shadow-lg"
-                />
+                <div className="relative">
+                  {/* Glow ring */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-50 blur-md" />
+                  <img
+                    src={DATA.avatarUrl}
+                    alt={DATA.name}
+                    className="relative w-48 h-48 md:w-56 md:h-56 object-cover rounded-full border-4 border-gray-800 shadow-2xl"
+                  />
+                </div>
               </div>
             </BlurFade>
           </div>
         </div>
       </section>
+
+      {/* Bottom spacer for dock navbar */}
+      <div className="h-20" />
     </main>
   );
 }
